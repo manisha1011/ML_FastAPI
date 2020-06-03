@@ -1,9 +1,9 @@
-FROM python:3.7-stretch
+FROM python:stretch
 
-COPY . /app
+COPY . ./app
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-CMD ["uvicorn", "app:app", "--reload"]
+CMD ["uvicorn", "app:app", "--reload", "--port 8000"]
