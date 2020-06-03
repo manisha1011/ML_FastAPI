@@ -1,12 +1,19 @@
-language: python
+sudo: required
 
-python:
-  - "3.7"
+services:
+  - docker
 
-  # command to install dependencies
-install:
-  - pip install -r requirements.txt
-
-  # command to run tests
 script:
-  - pytest
+  # Build images
+  - docker build -t jmeisele/fastapi_app1 ./app1
+  - docker build -t jmeisele/fastapi_app2 ./app2
+  - docker build -t jmeisele/flask_nginx ./nginx
+
+after_success:
+  # Login to docker CLI
+  - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Push images to DockerHub
+  - docker push jmeisele/fastapi_app1
+  - docker push jmeisele/fastapi_app2 
+  - docker push jmeisele/flask_nginx 

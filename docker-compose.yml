@@ -1,0 +1,38 @@
+version: '3'
+services: 
+    python1:
+        container_name: fastapi-service-1
+        restart: always
+        build: 
+            context: ./app1
+            dockerfile: Dockerfile
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - ./app1:/app
+
+    python2:
+        container_name: fastapi-service-2
+        restart: always
+        build: 
+            context: ./app2
+            dockerfile: Dockerfile
+        ports: 
+            - "3001:3001"
+        volumes: 
+            - ./app2:/app
+    
+    nginx:
+        container_name: nginx
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on: 
+            - python1
+            - python2
+        volumes: 
+            - ./nginx:/etc/nginx/conf.d/
