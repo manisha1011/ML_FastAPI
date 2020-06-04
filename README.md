@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.com/jmeisele/fastapi.svg?branch=master)](https://travis-ci.com/jmeisele/fastapi)
-
 ![Python application](https://github.com/jmeisele/ML_FastAPI/workflows/Python%20application/badge.svg?branch=master)
 
 # FastAPI
